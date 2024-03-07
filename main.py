@@ -15,12 +15,10 @@ class Apple:
 
     def load_image(self, filename):
         try:
-            image_path = os.path.join(os.getcwd(), "Snake-Game/resource", filename)
+            image_path = os.path.join("E:/Python/Snake-Game/resource", filename)
             return pygame.image.load(image_path).convert()
         except pygame.error as e:
-            print(f"Error loading {filename} image: {e}")
-            pygame.quit()
-            quit()
+            print(f"Error loading image {filename}: {e}")
     
     def move(self):
         self.x=random.randint(1,19)*SIZE
@@ -36,19 +34,17 @@ class Apple:
 class Snake:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = self.load_image("piece.jpg").convert_alpha()
+        self.image = self.load_image("piece.png")
         self.direction = 'down'
         self.length = 1
         self.x, self.y = [40], [40]
 
     def load_image(self, filename):
         try:
-            # image_path = os.path.join(os.getcwd(), "E:/Python/resource/piece.jpg")
-            return pygame.image.load("Snake-Game/resource/piece.jpg").convert_alpha()
+            image_path = os.path.join("E:/Python/Snake-Game/resource", filename)
+            return pygame.image.load(image_path).convert()
         except pygame.error as e:
-            print(f"Error loading {filename} image: {e}")
-            pygame.quit()
-            quit()
+            print(f"Error loading image {filename}: {e}")
 
     def move_left(self):
         self.direction = 'left'
@@ -112,14 +108,14 @@ class Game:
         return False
 
     def render_background(self):
-        bg_path = os.path.join(os.getcwd(), "Snake-Game/resource/background.png")
+        bg_path = os.path.join(os.getcwd(), "E:/Python/Snake-Game/resource/background.png")
         bg = pygame.image.load(bg_path)
         self.surface.blit(bg, (0, 0))
 
 
     def play_sound(self, sound_file):
         try:
-            sound_path = os.path.join(os.getcwd(), "Snake-Game/resource", sound_file)
+            sound_path = os.path.join(os.getcwd(), "E:/Python/Snake-Game/resource", sound_file)
             pygame.mixer.Sound(sound_path).play()
         except pygame.error as e:
             print(f"Error playing sound {sound_file}: {e}")
@@ -198,9 +194,11 @@ class Game:
                 if not pause:
                     self.play()
             except Exception as e:
+                print(f"Exception caught: {e}")
                 self.show_game_over()
                 pause = True
                 self.reset()
+
 
             time.sleep(.25)
 
