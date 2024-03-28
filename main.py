@@ -6,6 +6,7 @@ import os
 from pygame import mixer
 
 SIZE = 40
+BLACK = "#3B3B3B"
 
 class Apple:
     def __init__(self, parent_screen):
@@ -152,16 +153,16 @@ class Game:
         return False
 
     def display_score(self):
-        font = pygame.font.SysFont('arial', 25)
-        score = font.render(f"Score: {self.snake.length-1}", True, (200, 200, 200))
+        font = pygame.font.SysFont('arial', 28)
+        score = font.render(f"Score: {self.snake.length-1}", True, (0,0,0))
         self.surface.blit(score, (650, 10))
 
     def show_game_over(self):
         self.render_background()
         font = pygame.font.SysFont('arial', 25)
-        line1 = font.render(f"Game is over! Your score is {self.snake.length-1}", True, (255, 255, 255))
+        line1 = font.render(f"Game is over! Your score is {self.snake.length-1}", True, (90,0,255))
         self.surface.blit(line1, (200, 300))
-        line2 = font.render("To play again press Enter. To exit press Escape!", True, (255, 255, 255))
+        line2 = font.render("To play again press Enter. To exit press Escape!", True, (90,0,255))
         self.surface.blit(line2, (200, 350))
         pygame.mixer.music.pause()
         pygame.display.flip()
@@ -200,7 +201,7 @@ class Game:
                 self.reset()
 
 
-            time.sleep(.25)
+            time.sleep(.15)
 
 if __name__ == '__main__':
     game = Game()
